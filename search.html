@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0;url=search.php">
+    <title>Buscando...</title>
+</head>
+<body>
+    <script>
+        // Obtener el parámetro "item" de la URL
+        const params = new URLSearchParams(window.location.search);
+        const itemName = params.get("item");
+
+        if (itemName) {
+            // Crear un formulario y enviarlo automáticamente con POST
+            const form = document.createElement("form");
+            form.method = "POST";
+            form.action = "https://bots.el-services.net/search.php";
+
+            // Campo oculto de "action"
+            const actionInput = document.createElement("input");
+            actionInput.type = "hidden";
+            actionInput.name = "action";
+            actionInput.value = "search";
+            form.appendChild(actionInput);
+
+            // Campo oculto con el nombre del objeto
+            const searchInput = document.createElement("input");
+            searchInput.type = "hidden";
+            searchInput.name = "searchname";
+            searchInput.value = itemName;
+            form.appendChild(searchInput);
+
+            document.body.appendChild(form);
+            form.submit();
+        } else {
+            document.body.innerHTML = "<h2>Error: No se especificó un objeto para buscar.</h2>";
+        }
+    </script>
+</body>
+</html>
